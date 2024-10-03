@@ -38,4 +38,13 @@ bitcoin-cli -regtest -rpcuser=test -rpcpassword=test decoderawtransaction 020000
 
 ## Subgraph-regtest
 
+```
+# Create database
+CREATE DATABASE "graph-node"
+WITH ENCODING 'UTF8'
+LC_COLLATE='C'
+LC_CTYPE='C'
+TEMPLATE template0;
+```
+
 `docker-compose -f docker-compose-subgraph.yml up -d`

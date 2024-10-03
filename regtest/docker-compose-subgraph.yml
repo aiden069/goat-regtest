@@ -21,11 +21,12 @@ services:
       - '8040:8040'
     depends_on:
       - ipfs
-      - postgres
+      # - postgres
     environment:
-      postgres_host: postgres
-      postgres_user: graph-node
-      postgres_pass: let-me-in
+      postgres_host: host.docker.internal
+      postgres_user: postgres
+      postgres_pass: Passw0rd
+      postgres_port: 30432
       postgres_db: graph-node
       ipfs: 'ipfs:5001'
       ethereum: 'localhost:http://goat-regtest-geth-node:8545'
@@ -37,20 +38,22 @@ services:
       - goat_network
     ports:
       - '5001:5001'
-  postgres:
-    image: postgres
-    container_name: goat-regtest-graph-postgres
-    ports:
-      - '5432:5432'
-    command: ["postgres", "-cshared_preload_libraries=pg_stat_statements"]
-    networks:
-      - goat_network
-    environment:
-      POSTGRES_USER: graph-node
-      POSTGRES_PASSWORD: let-me-in
-      POSTGRES_DB: graph-node
-      PGDATA: "/var/lib/postgresql/data"
-      POSTGRES_INITDB_ARGS: "-E UTF8 --locale=C"
+  # postgres:
+  #   image: postgres
+  #   container_name: goat-regtest-graph-postgres
+  #   deploy:
+  #     replicas: 0
+  #   ports:
+  #     - '5432:5432'
+  #   command: ["postgres", "-cshared_preload_libraries=pg_stat_statements"]
+  #   networks:
+  #     - goat_network
+  #   environment:
+  #     POSTGRES_USER: graph-node
+  #     POSTGRES_PASSWORD: let-me-in
+  #     POSTGRES_DB: graph-node
+  #     PGDATA: "/var/lib/postgresql/data"
+  #     POSTGRES_INITDB_ARGS: "-E UTF8 --locale=C"
 
 networks:
   goat_network:

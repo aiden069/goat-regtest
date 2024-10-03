@@ -9,21 +9,21 @@ services:
       - "3001:3001"
     environment:
       PORT: 3001
-      DATABASE_URL: "mysql://root:123456@mysql-goat:3306/engine"
+      DATABASE_URL: "mysql://root:Passw0rd@host.docker.internal:30306/engine"
       GRPC_URL: "goat-relayer-1:50051"
       REG_TEST_PORT: 18443
       REG_TEST_HOST: "bitcoin-regtest"
       REG_TEST_USER_NAME: "test"
       REG_TEST_PASS_WORD: "test"
       GRAPH_BRIDGE_URL: "http://goat-regtest-graph-node:8000/subgraphs/name/Bridge"
-    depends_on:
-      mysql:
-        condition: service_healthy
+    # depends_on:
+    #   mysql:
+    #     condition: service_healthy
     networks:
       - goat_network
 
   engine-dev:
-    image: goatnetwork/engine-dev:0.1.1
+    image: goatnetwork/engine-dev:0.1.2
     container_name: engine-dev
     platform: linux/amd64
     environment:
@@ -48,25 +48,27 @@ services:
     networks:
       - goat_network
 
-  mysql:
-    image: mysql:5.7
-    platform: linux/amd64
-    container_name: mysql-goat
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: "123456"
-      MYSQL_DATABASE: "engine"
-      MYSQL_USER: "engine"
-      MYSQL_PASSWORD: "123456"
-    ports:
-      - "13306:3306"
-    networks:
-      - goat_network
-    healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+  # mysql:
+  #   image: mysql:5.7
+  #   platform: linux/amd64
+  #   container_name: mysql-goat
+  #   restart: always
+  #   deploy:
+  #     replicas: 0
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: "123456"
+  #     MYSQL_DATABASE: "engine"
+  #     MYSQL_USER: "engine"
+  #     MYSQL_PASSWORD: "123456"
+  #   ports:
+  #     - "13306:3306"
+  #   networks:
+  #     - goat_network
+  #   healthcheck:
+  #     test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 5
 
 networks:
   goat_network:
