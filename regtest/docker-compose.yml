@@ -56,10 +56,10 @@ services:
       file: docker-compose-front.yml
       service: unisat-server-proxy
 
-  mysql:
-    extends:
-      file: docker-compose-front.yml
-      service: mysql
+  # mysql:
+  #   extends:
+  #     file: docker-compose-front.yml
+  #     service: mysql
 
   goat-deploy-thegraph:
     extends:
@@ -76,10 +76,10 @@ services:
       file: docker-compose-subgraph.yml
       service: ipfs
 
-  postgres:
-    extends:
-      file: docker-compose-subgraph.yml
-      service: postgres
+  # postgres:
+  #   extends:
+  #     file: docker-compose-subgraph.yml
+  #     service: postgres
 
 networks:
   goat_network:
