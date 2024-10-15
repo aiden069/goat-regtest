@@ -43,12 +43,12 @@ services:
 
   engine-api-dev:
     extends:
-      file: docker-compose-front.yml
+      file: docker-compose-front-v0.yml
       service: engine-api-dev
 
   engine-dev:
     extends:
-      file: docker-compose-front.yml
+      file: docker-compose-front-v0.yml
       service: engine-dev
 
   unisat-server-proxy:
